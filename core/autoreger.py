@@ -26,6 +26,12 @@ class AutoReger:
         discords = file_to_list(DISCORDS_FILE_PATH)
         proxies = file_to_list(PROXIES_FILE_PATH)
 
+        temp_ds = []
+        for discord in discords:
+            temp_ds.append(next(item for item in discord.split(":") if len(item) == 70))
+
+        discords = temp_ds
+
         min_accounts_len = len(discords)
 
         if not emails:
@@ -61,9 +67,9 @@ class AutoReger:
         self.custom_user_delay = CUSTOM_DELAY
 
         accounts = AutoReger.get_accounts()
-        self.register(accounts[0])
-        # with ThreadPoolExecutor(max_workers=threads) as executor:
-        #     executor.map(self.register, accounts)
+
+        with ThreadPoolExecutor(max_workers=threads) as executor:
+            executor.map(self.register, accounts)
 
         if self.success:
             logger.success(f"Successfully registered {self.success} accounts :)")
