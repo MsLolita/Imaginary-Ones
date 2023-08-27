@@ -12,3 +12,5 @@ WALLETS_FILE_PATH = f"{PATH}/wallets.txt"
 DISCORDS_FILE_PATH = f"{PATH}/discords.txt"
 PROXIES_FILE_PATH = f"{PATH}/proxies.txt"
 
+REFERRAL_CODES_PATH = f"{PATH}/referral_codes.txt"
+

@@ -9,7 +9,7 @@ from core.imaginaryones import ImaginaryOnes
 
 from inputs.config import (
     THREADS, CUSTOM_DELAY,
-    EMAILS_FILE_PATH, WALLETS_FILE_PATH, DISCORDS_FILE_PATH, PROXIES_FILE_PATH
+    EMAILS_FILE_PATH, WALLETS_FILE_PATH, DISCORDS_FILE_PATH, PROXIES_FILE_PATH, REFERRAL_CODES_PATH
 )
 
 
@@ -28,7 +28,7 @@ class AutoReger:
 
         temp_ds = []
         for discord in discords:
-            temp_ds.append(next(item for item in discord.split(":") if len(item) == 70))
+            temp_ds.append(next(item for item in discord.split(":") if len(item) > 60))
 
         discords = temp_ds
 
@@ -52,7 +52,7 @@ class AutoReger:
     @staticmethod
     def remove_account():
         return (shift_file(EMAILS_FILE_PATH), shift_file(WALLETS_FILE_PATH),
-                shift_file(DISCORDS_FILE_PATH), shift_file(PROXIES_FILE_PATH))
+                shift_file(DISCORDS_FILE_PATH), shift_file(PROXIES_FILE_PATH), shift_file(REFERRAL_CODES_PATH))
 
     def start(self):
         self.ref_links = file_to_list("inputs/referral_codes.txt")
