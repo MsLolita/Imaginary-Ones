@@ -108,26 +108,29 @@ class ImaginaryOnes(Session):
         return response.json()
 
     def connect_ds(self):
-        headers = {
-            'authority': 'world-api-svr.imaginaryones.com',
-            'accept': '*/*',
-            'accept-language': 'uk-UA,uk;q=0.9,en-US;q=0.8,en;q=0.7',
-            'origin': 'https://carnival-prelaunch.imaginaryones.com',
-            'referer': 'https://carnival-prelaunch.imaginaryones.com/',
-            'user-agent': pyuseragents.random(),
-        }
+        try:
+            headers = {
+                'authority': 'world-api-svr.imaginaryones.com',
+                'accept': '*/*',
+                'accept-language': 'uk-UA,uk;q=0.9,en-US;q=0.8,en;q=0.7',
+                'origin': 'https://carnival-prelaunch.imaginaryones.com',
+                'referer': 'https://carnival-prelaunch.imaginaryones.com/',
+                'user-agent': pyuseragents.random(),
+            }
 
-        ds_link = self.get_ds_auth_link(headers)
+            ds_link = self.get_ds_auth_link(headers)
 
-        discord = Discord(self.discord_token, self.proxy)
-        connection_link = discord.connect(ds_link)
-        connection_code = connection_link.split("&access_token=")[1].split("&expires_in")[0]
+            discord = Discord(self.discord_token, self.proxy)
+            connection_link = discord.connect(ds_link)
+            connection_code = connection_link.split("&access_token=")[1].split("&expires_in")[0]
 
-        data = self.send_connection_code(headers, connection_code)
-        self.extra_field = data["data"]["user"]["id"]
+            data = self.send_connection_code(headers, connection_code)
+            self.extra_field = data["data"]["user"]["id"]
 
-        self.update_user_ds_id()
-        self.promote()
+            self.update_user_ds_id()
+            self.promote()
+        except Exception as e:
+            raise TypeError(f"Can't connect ds {e}")
 
     def get_ds_auth_link(self, headers: dict):
         url = 'https://world-api-svr.imaginaryones.com/production/auth/discord'

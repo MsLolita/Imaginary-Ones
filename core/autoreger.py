@@ -23,12 +23,12 @@ class AutoReger:
     def get_accounts():
         emails = file_to_list(EMAILS_FILE_PATH)
         wallets = file_to_list(WALLETS_FILE_PATH)
-        discords = file_to_list(DISCORDS_FILE_PATH)
+        discords = file_to_list(DISCORDS_FILE_PATH).reverse()
         proxies = file_to_list(PROXIES_FILE_PATH)
 
         temp_ds = []
         for discord in discords:
-            temp_ds.append(next(item for item in discord.split(":") if len(item) > 60))
+            temp_ds.append(next(item for item in discord.split(":") if len(item) > 50))
 
         discords = temp_ds
 
