@@ -62,13 +62,14 @@ class ImaginaryOnes(Session):
 
     def register(self):
         resp_json = self.create_account()
+        # print(resp_json)
         data = resp_json["data"]
 
         self.user_id = data["id"]
         self.ref_code = data["code"]
 
-        self.retrieve_account()
-
+        resp_json = self.retrieve_account()
+        # print(resp_json)
         # logger.info(f"{self.email} | Registered!")
 
     def create_account(self):
@@ -83,7 +84,7 @@ class ImaginaryOnes(Session):
         json_data = {
             'test_mode': False,
             'check_status': False,
-            'one_click_signup': True,
+            'one_click_signup': one_click_signup,
             'email': self.email,
             'crypto_wallet_address': self.address,
             'uuid': ImaginaryOnes.uuid,

@@ -23,8 +23,10 @@ class AutoReger:
     def get_accounts():
         emails = file_to_list(EMAILS_FILE_PATH)
         wallets = file_to_list(WALLETS_FILE_PATH)
-        discords = file_to_list(DISCORDS_FILE_PATH).reverse()
+        discords = file_to_list(DISCORDS_FILE_PATH)
         proxies = file_to_list(PROXIES_FILE_PATH)
+
+        discords.reverse()
 
         temp_ds = []
         for discord in discords:
@@ -79,7 +81,6 @@ class AutoReger:
     def register(self, account: tuple):
         imaginary_ones = ImaginaryOnes(*account, ref_code=self.ref_links.pop())
         is_ok = False
-        res_msg: str = ""
 
         try:
             time.sleep(self.custom_user_delay)
