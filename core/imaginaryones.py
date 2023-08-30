@@ -130,6 +130,7 @@ class ImaginaryOnes(Session):
 
             self.update_user_ds_id()
             self.promote()
+            self.confirm()
         except Exception as e:
             raise TypeError(f"Can't connect ds {e}")
 
@@ -171,6 +172,17 @@ class ImaginaryOnes(Session):
 
     def promote(self):
         url = f'https://app.referralhero.com/api/v2/lists/{ImaginaryOnes.uuid}/subscribers/{self.user_id}/promote'
+
+        params = {
+            'api_token': ImaginaryOnes.api_token,
+        }
+
+        response = self.session.post(url, params=params)
+
+        return response.json()
+
+    def confirm(self):
+        url = f'https://app.referralhero.com/api/v2/lists/{ImaginaryOnes.uuid}/subscribers/{self.user_id}/confirm'
 
         params = {
             'api_token': ImaginaryOnes.api_token,
