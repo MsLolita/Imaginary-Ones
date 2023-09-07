@@ -1,4 +1,4 @@
-# AlienSwap Daily claim bonus
+# Imaginary-Ones Referrals AutoReger
 # Main <crypto/> moves: https://t.me/+tdC-PXRzhnczNDli\n
 
 ## Can change params in inputs/config.py ![image](https://github.com/MsLolita/Imaginary-Ones/assets/58307006/0c304331-949c-4a63-9ebc-6d9cc23f46bb)
